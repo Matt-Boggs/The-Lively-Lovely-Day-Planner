@@ -35,18 +35,22 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="text/javascript">
-      var currentDay = $("#currentDay");
-      var rightNow = moment().format('MMMM Do YYYY, h:mm:ss a');
-      console.log(rightNow);
+      
       // GIVEN I am using a daily planner to create a schedule
       // WHEN I open the planner
       // THEN the current day is displayed at the top of the calendar
       $(document).ready(function(){
 
+        var currentDay = $("#currentDay"); // This is where the time is displayed
+      
+        // This displays the current time, updating every second
         var liveDate = setInterval(function(){
-          var rightNow = moment();
-          currentDay.text(rightNow.format('MMMM Do YYYY, h:mm:ss a'))
-        },1000)
+          var rightNow = moment().format('MMMM Do YYYY, h:mm:ss a'); //grabs the date
+          currentDay.text(rightNow);//display the date
+        },1000);
+
+
+
       });
       
       
