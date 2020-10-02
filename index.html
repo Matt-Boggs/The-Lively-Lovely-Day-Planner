@@ -87,20 +87,56 @@
       // THEN the current day is displayed at the top of the calendar
       $(document).ready(function(){
 
+
         var rightNow = dayjs().format('MMMM D H:mm:ss');
         var currentDay = $("#currentDay"); // This is where the time is displayed
         var saveBtn = $(".saveBtn");
        
         saveBtn.on("click", function(){
-          var savedTextID = $(this).siblings("textarea").val()
-          console.log(savedTextID)
-        })
+          //FIGURE OUT HOW TO USE SWITCH AND CASE TO CUT DOWN ON THE LENGTH OF THIS PARTICULAR CODE
+          //IF STATEMENTS FOR EACH HOUR ID, AND LOCAL STORAGE FOR EACH HOUR TEXT LIKE USERiNPUT1
+          var savedText = $(this).siblings("textarea").val()
+          var savedID = $(this).parent().attr("id")
+          var savedIDInt = parseInt(savedID)
+          if (savedIDInt === 9){
+            localStorage.setItem("text9", savedText)
+          } else if (savedIDInt === 10){
+            localStorage.setItem("text10", savedText)
+          } else if (savedIDInt === 11){
+            localStorage.setItem("text11", savedText)
+          } else if (savedIDInt === 12){
+            localStorage.setItem("text12", savedText)
+          } else if (savedIDInt === 13){
+            localStorage.setItem("text13", savedText)
+          } else if (savedIDInt === 14){
+            localStorage.setItem("text14", savedText)
+          } else if (savedIDInt === 15){
+            localStorage.setItem("text15", savedText)
+          } else if (savedIDInt === 16){
+            localStorage.setItem("text16", savedText)
+          } else if (savedIDInt === 17){
+            localStorage.setItem("text17", savedText)
+          }
+})
         // This displays the current time, updating every second
         var liveDate = setInterval(function(){
           currentDay.text(rightNow);//display the date
         },1000);
 
 
+        function grabStored(){
+          var storageText = localStorage.getItem("userInput")
+          $("#9").children("textarea").text(localStorage.getItem("text9"))
+          $("#10").children("textarea").text(localStorage.getItem("text10"))
+          $("#11").children("textarea").text(localStorage.getItem("text11"))
+          $("#12").children("textarea").text(localStorage.getItem("text12"))
+          $("#13").children("textarea").text(localStorage.getItem("text13"))
+          $("#14").children("textarea").text(localStorage.getItem("text14"))
+          $("#15").children("textarea").text(localStorage.getItem("text15"))
+          $("#16").children("textarea").text(localStorage.getItem("text16"))
+          $("#17").children("textarea").text(localStorage.getItem("text17"))
+        }
+        grabStored()
 
 
       });
