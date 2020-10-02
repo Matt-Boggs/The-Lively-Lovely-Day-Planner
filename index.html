@@ -29,55 +29,56 @@
       <p id="currentDay" class="lead"></p>
     </header>
     <div class="container">
-      <div id="9" class="row hour">
-        <div class="col-1 hour">9PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="9" class="row">
+        <div class="col-1 hour">9AM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="10" class="row hour">
-        <div class="col-1 hour">10PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="10" class="row">
+        <div class="col-1 hour">10AM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="11" class="row hour">
-        <div class="col-1 hour">11PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="11" class="row">
+        <div class="col-1 hour">11AM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="12" class="row hour">
+      <div id="12" class="row">
         <div class="col-1 hour">12PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="13" class="row hour">
-        <div class="col-1 hour">13PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="13" class="row">
+        <div class="col-1 hour">1PM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="14" class="row hour">
-        <div class="col-1 hour">14PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="14" class="row">
+        <div class="col-1 hour">2PM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="15" class="row hour">
-        <div class="col-1 hour">15PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="15" class="row">
+        <div class="col-1 hour">3PM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="16" class="row hour">
-        <div class="col-1 hour">16PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="16" class="row">
+        <div class="col-1 hour">4PM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
-      <div id="17" class="row hour">
-        <div class="col-1 hour">17PM</div>
-        <textarea class="col-10">WHAT YOURE DOING AT THIS HOUR</textarea>
+      <div id="17" class="row">
+        <div class="col-1 hour">5PM</div>
+        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script type="text/javascript">
       
       // ONLY HAS TO BE FOR ONE DAY
@@ -86,13 +87,19 @@
       // THEN the current day is displayed at the top of the calendar
       $(document).ready(function(){
 
+        var rightNow = dayjs().format('MMMM D H:mm:ss');
         var currentDay = $("#currentDay"); // This is where the time is displayed
-      
+        var saveBtn = $(".saveBtn");
+       
+        saveBtn.on("click", function(){
+          var savedTextID = $(this).siblings("textarea").val()
+          console.log(savedTextID)
+        })
         // This displays the current time, updating every second
         var liveDate = setInterval(function(){
-          var rightNow = moment().format('MMMM Do YYYY, h:mm:ss a'); //grabs the date
           currentDay.text(rightNow);//display the date
         },1000);
+
 
 
 
