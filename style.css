@@ -27,14 +27,15 @@ textarea{
 
 .time-block{
   text-align: center;
-  border-radius: 15px;
+  border-radius: 15px 0px 0px 15px;
+  /* outline: solid 1px black; */
+  border: solid 1px black;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
   border-top: 1px solid white;;
-  outline: solid 1px black;
 }
 
 .hour {
@@ -69,4 +70,8 @@ textarea{
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.container {
+  margin-bottom: 20px;
 }
