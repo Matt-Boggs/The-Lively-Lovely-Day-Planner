@@ -28,50 +28,50 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
+    <div id="Parent" class="container">
       <div id="9" class="row">
         <div class="col-1 hour">9AM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="10" class="row">
         <div class="col-1 hour">10AM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="11" class="row">
         <div class="col-1 hour">11AM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="12" class="row">
         <div class="col-1 hour">12PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="13" class="row">
         <div class="col-1 hour">1PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="14" class="row">
         <div class="col-1 hour">2PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="15" class="row">
         <div class="col-1 hour">3PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="16" class="row">
         <div class="col-1 hour">4PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
       <div id="17" class="row">
         <div class="col-1 hour">5PM</div>
-        <textarea class="col-10 time-block">WHAT YOURE DOING AT THIS HOUR</textarea>
+        <textarea class="col-10 time-block"></textarea>
         <button class="col-1 saveBtn">SAVE ICON</button>
       </div>
     </div>
@@ -80,18 +80,58 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script type="text/javascript">
-      
-      // ONLY HAS TO BE FOR ONE DAY
-      // GIVEN I am using a daily planner to create a schedule
-      // WHEN I open the planner
-      // THEN the current day is displayed at the top of the calendar
       $(document).ready(function(){
 
 
+        var row = $("#Parent").children().has("id");
+        var rowID = row.prevObject[0].getAttribute("id")
+
+        // for (i=0;i<9;i++){
+        // var rowID = row.prevObject[i].getAttribute("id")
+        // console.log(rowID)
+          
+        
         var rightNow = dayjs().format('MMMM D H:mm:ss');
         var currentDay = $("#currentDay"); // This is where the time is displayed
+        currentDay.text(rightNow)
         var saveBtn = $(".saveBtn");
        
+        // This displays the current time, updating every second
+        var liveDate = setInterval(function(){
+          rightNow = dayjs().format('MMMM D H:mm:ss');
+          currentDay.text(rightNow);//display the date
+        },1000);
+
+        function hourColor(){
+          // currentHour = parseInt(dayjs().format('H'))//this works
+          currentHour = 12
+          console.log(currentHour)
+
+          for (i=0;i<9;i++){
+            var rowID = parseInt(row.prevObject[i].getAttribute("id"))
+            // var rowText = row.prevObject[i].children[1]
+            var rowText = $("textarea")[i]
+            console.log(rowText)
+            
+            if (rowID < currentHour) {
+              console.log("low");
+              rowText.setAttribute("class", "past")
+              //attach "past" class
+            } if (rowID === currentHour) {
+              console.log("mid");
+              rowText.setAttribute("class", "present")
+              //attach "present" class
+              // .attr("class", "present")
+            } if (rowID > currentHour) {
+              console.log("high")
+              rowText.setAttribute("class", "future")
+              //attach "future" class
+              // .attr("class", "future")
+            }
+          }
+        }
+        hourColor()
+
         saveBtn.on("click", function(){
           //FIGURE OUT HOW TO USE SWITCH AND CASE TO CUT DOWN ON THE LENGTH OF THIS PARTICULAR CODE
           //IF STATEMENTS FOR EACH HOUR ID, AND LOCAL STORAGE FOR EACH HOUR TEXT LIKE USERiNPUT1
@@ -117,13 +157,8 @@
           } else if (savedIDInt === 17){
             localStorage.setItem("text17", savedText)
           }
-})
-        // This displays the current time, updating every second
-        var liveDate = setInterval(function(){
-          currentDay.text(rightNow);//display the date
-        },1000);
-
-
+        })
+        
         function grabStored(){
           var storageText = localStorage.getItem("userInput")
           $("#9").children("textarea").text(localStorage.getItem("text9"))
@@ -136,7 +171,8 @@
           $("#16").children("textarea").text(localStorage.getItem("text16"))
           $("#17").children("textarea").text(localStorage.getItem("text17"))
         }
-        grabStored()
+        grabStored();
+        
 
 
       });
