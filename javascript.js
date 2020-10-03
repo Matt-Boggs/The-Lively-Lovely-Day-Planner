@@ -5,7 +5,7 @@ $(document).ready(function(){
     currentDay.text(rightNow);
     var saveBtn = $(".saveBtn");
     
-    var liveDate = setInterval(function(){
+    setInterval(function(){
       rightNow = dayjs().format('MMMM D H:mm:ss');
       currentDay.text(rightNow);
     },1000);
