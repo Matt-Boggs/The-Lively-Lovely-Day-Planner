@@ -1,28 +1,29 @@
 $(document).ready(function(){
+
     var row = $("#Parent").children().has("id");
     var rightNow = dayjs().format('MMMM D H:mm:ss');
     var currentDay = $("#currentDay");
     currentDay.text(rightNow);
     var saveBtn = $(".saveBtn");
     
+    // This function is what shows the time at the top of the page
     setInterval(function(){
       rightNow = dayjs().format('MMMM D H:mm:ss');
       currentDay.text(rightNow);
     },1000);
 
+    // This function colors in the timeblocks depending on whether or not they are in the past, present, or future
     function hourColor(){
       currentHour = parseInt(dayjs().format('H'));
       for (i=0;i<9;i++){
         var rowID = parseInt(row.prevObject[i].getAttribute("id"));
         var rowText = $("textarea")[i];
+        
         if (rowID < currentHour) {
-          console.log("low");
           rowText.setAttribute("class", "past");
         } if (rowID === currentHour) {
-          console.log("mid");
           rowText.setAttribute("class", "present");
         } if (rowID > currentHour) {
-          console.log("high");
           rowText.setAttribute("class", "future");
         };
       };
@@ -34,6 +35,7 @@ $(document).ready(function(){
       var savedText = $(this).siblings("textarea").val();
       var savedID = $(this).parent().attr("id");
       var savedIDInt = parseInt(savedID);
+
       if (savedIDInt === 9){
         localStorage.setItem("text9", savedText);
       } else if (savedIDInt === 10){
@@ -56,7 +58,7 @@ $(document).ready(function(){
     });
 
     function grabStored(){
-      var storageText = localStorage.getItem("userInput");
+
       $("#9").children("textarea").text(localStorage.getItem("text9"));
       $("#10").children("textarea").text(localStorage.getItem("text10"));
       $("#11").children("textarea").text(localStorage.getItem("text11"));
@@ -66,6 +68,8 @@ $(document).ready(function(){
       $("#15").children("textarea").text(localStorage.getItem("text15"));
       $("#16").children("textarea").text(localStorage.getItem("text16"));
       $("#17").children("textarea").text(localStorage.getItem("text17"));
+      
     };
     grabStored();
+
   });
